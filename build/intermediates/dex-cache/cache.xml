@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/dhc4z/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/dhc4z/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-0d4cfe102f89e78dde4f953e181f44155e60a44c.jar" />
+    </item>
+    <item
+        jar="/Users/dhc4z/AndroidStudioProjects/PopularMovies/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="/Users/dhc4z/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/classes-58d3b0ec3f1c2ed81d4ec732fff2283b8f35692d.jar" />
+    </item>
+    <item
+        jar="/Users/dhc4z/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/Users/dhc4z/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-5ab2c666e1437ebd8fbf2cb8f9a6f96b49be48e0.jar" />
+    </item>
+    <item
+        jar="/Users/dhc4z/AndroidStudioProjects/PopularMovies/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/Users/dhc4z/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-a5df165967886faefb1cd98840fa6aecba8069b2.jar" />
+    </item>
+    <item
+        jar="/Users/dhc4z/AndroidStudioProjects/PopularMovies/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/dhc4z/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/classes-7d747cfcee883ec3de825e03f21809ec18b00a95.jar" />
+    </item>
+
+</items>
