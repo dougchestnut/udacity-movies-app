@@ -5,14 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
-public class ImageAdapter extends ArrayAdapter<Movie> {
+public class ReviewAdapter extends ArrayAdapter<Review> {
 
     Context mContext;
-    public ImageAdapter(Context context) {
+    public ReviewAdapter(Context context) {
         super(context, R.layout.grid_content);
         this.mContext = context;
     }
@@ -22,18 +20,16 @@ public class ImageAdapter extends ArrayAdapter<Movie> {
         View v = convertView;
         if (v==null) {
             LayoutInflater vi = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v=vi.inflate(R.layout.grid_content, null);
+            v=vi.inflate(R.layout.review_content, null);
         }
 
-        ImageView imageView = (ImageView)v.findViewById(R.id.imageView);
-        String url = getItem(position).getPosterURL();
+        Review review = getItem(position);
 
-        Picasso.with(mContext)
-                .load(url)
-                .resize(185,277)
-                .into(imageView);
+        TextView reviewView = (TextView)v.findViewById(R.id.review);
+        reviewView.setText( review.content );
 
         return v;
     }
+
 
 }

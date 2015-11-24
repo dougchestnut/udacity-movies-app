@@ -1,5 +1,6 @@
 package am.foodi.popularmovies;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -8,7 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//public class Movie implements Serializable
+import am.foodi.popularmovies.data.MoviesContract;
+
 public class Movie implements Parcelable {
 
     public Boolean adult;
@@ -25,6 +27,7 @@ public class Movie implements Parcelable {
     public Boolean video;
     public double vote_average;
     public int vote_count;
+    public Boolean favorite;
     private String baseURL = "http://image.tmdb.org/t/p/";
     private String defaultSize = "w185";
 
@@ -48,6 +51,7 @@ public class Movie implements Parcelable {
         bundle.putBoolean("video", video);
         bundle.putDouble("vote_average", vote_average);
         bundle.putInt("vote_count", vote_count);
+        bundle.putBoolean("favorite", favorite);
         return bundle;
     }
 
@@ -65,6 +69,23 @@ public class Movie implements Parcelable {
         }
     };
 
+    public Movie(ContentValues cv){
+        adult = cv.getAsBoolean(MoviesContract.MoviesEntry.COLUMN_ADULT);
+        backdrop_path = cv.getAsString(MoviesContract.MoviesEntry.COLUMN_BACKDROP_PATH);
+        id = cv.getAsInteger(MoviesContract.MoviesEntry.COLUMN_MOVIE_ID);
+        original_language = cv.getAsString(MoviesContract.MoviesEntry.COLUMN_LANGUAGE);
+        original_title = cv.getAsString(MoviesContract.MoviesEntry.COLUMN_ORIGINAL_TITLE);
+        overview = cv.getAsString(MoviesContract.MoviesEntry.COLUMN_OVERVIEW);
+        release_date = cv.getAsString(MoviesContract.MoviesEntry.COLUMN_DATE);
+        poster_path = cv.getAsString(MoviesContract.MoviesEntry.COLUMN_POSTER_PATH);
+        popularity = cv.getAsDouble(MoviesContract.MoviesEntry.COLUMN_POPULARITY);
+        title = cv.getAsString(MoviesContract.MoviesEntry.COLUMN_TITLE);
+        video = cv.getAsBoolean(MoviesContract.MoviesEntry.COLUMN_VIDEO);
+        vote_average = cv.getAsDouble(MoviesContract.MoviesEntry.COLUMN_VOTE_AVERAGE);
+        vote_count = cv.getAsInteger(MoviesContract.MoviesEntry.COLUMN_VOTE_COUNT);
+        favorite = new Boolean(cv.getAsInteger(MoviesContract.MoviesEntry.COLUMN_FAVORITE)==1);
+    }
+
     public Movie(Parcel in) {
         Bundle bundle = in.readBundle();
         adult = bundle.getBoolean("adult");
@@ -81,6 +102,7 @@ public class Movie implements Parcelable {
         video = bundle.getBoolean("video");
         vote_average = bundle.getDouble("vote_average");
         vote_count = bundle.getInt("vote_count");
+        favorite = bundle.getBoolean("favorite");
     }
 
     public Movie(JSONObject movie) throws JSONException {
@@ -102,6 +124,11 @@ public class Movie implements Parcelable {
         video = movie.getBoolean("video");
         vote_average = movie.getDouble("vote_average");
         vote_count = movie.getInt("vote_count");
+        favorite = false;
+    }
+
+    public void setFavorite(Boolean fav) {
+        this.favorite = fav;
     }
 
         private String getStringOrNull(JSONObject movie, String key) throws JSONException {
@@ -127,5 +154,24 @@ public class Movie implements Parcelable {
 
     public String getPosterURL(String size) {
         return baseURL + size + poster_path;
+    }
+
+    public ContentValues getContentValues() {
+        ContentValues movieValues = new ContentValues();
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_ADULT, this.adult);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_BACKDROP_PATH, this.backdrop_path);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_MOVIE_ID, this.id);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_LANGUAGE, this.original_language);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_ORIGINAL_TITLE, this.original_title);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_OVERVIEW, this.overview);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_DATE, this.release_date);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_POSTER_PATH, this.poster_path);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_POPULARITY, this.popularity);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_TITLE, this.title);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_VIDEO, this.video);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_VOTE_AVERAGE, this.vote_average);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_VOTE_COUNT, this.vote_count);
+        movieValues.put(MoviesContract.MoviesEntry.COLUMN_FAVORITE, this.favorite);
+        return movieValues;
     }
 }

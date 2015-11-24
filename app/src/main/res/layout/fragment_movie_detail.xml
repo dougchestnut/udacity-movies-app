@@ -1,18 +1,19 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="0dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     android:paddingBottom="0dp"
-    tools:context="am.foodi.popularmovies.MovieDetailActivityFragment">
+    tools:context="am.foodi.popularmovies.MovieDetailFragment"
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:orientation="vertical">
+
+
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -38,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/scrollView">
-            <LinearLayout
+            <LinearLayout android:id="@+id/scrolledDetailContent"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -85,6 +86,16 @@
                             android:paddingRight="20dp"
                             android:paddingBottom="20dp"
                              />
+
+                        <ToggleButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="New ToggleButton"
+                            android:id="@+id/toggleFavoriteButton"
+                            android:textOn="Remove from Favorites"
+                            android:textOff="Add to Favorites" />
+
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -100,9 +111,33 @@
                         android:id="@+id/overview"
                         android:padding="10dp" />
                 </FrameLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/videos">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/trailer_header"
+                        android:text="Trailers:"
+                        android:padding="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reviews">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/reviews_header"
+                        android:text="Reviews:"
+                        android:padding="10dp"/>
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
 
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
