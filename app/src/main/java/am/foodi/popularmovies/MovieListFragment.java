@@ -32,6 +32,8 @@ public class MovieListFragment extends Fragment implements LoaderManager.LoaderC
     private GridView gridView;
 
     private int sort_index;
+    private int selected_movie_index = 0;
+
 
     private Context mContext;
 
@@ -79,6 +81,7 @@ public class MovieListFragment extends Fragment implements LoaderManager.LoaderC
     public void updateSort(int index) {
         Log.v(LOG_TAG, "sort passed to fragment: " + sort_index);
         sort_index = index;
+        selected_movie_index = 0;
         if (sort_index < 2) {
             fetchMovies();
             getLoaderManager().restartLoader(MOVIES_LOADER, null, this);
@@ -92,6 +95,10 @@ public class MovieListFragment extends Fragment implements LoaderManager.LoaderC
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        if (savedInstanceState != null) {
+            selected_movie_index = savedInstanceState.getInt("selected_movie_index");
+        }
+
         View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
 
         mMovieAdpater = new MoviesAdapter(getActivity(),null,0);
@@ -104,6 +111,7 @@ public class MovieListFragment extends Fragment implements LoaderManager.LoaderC
             public void onItemClick(AdapterView adapterView, View view, int position, long l) {
                 Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
                 if (cursor != null) {
+                    selected_movie_index = position;
                     ContentValues cv = new ContentValues();
                     DatabaseUtils.cursorRowToContentValues(cursor, cv);
                     ((Callback) getActivity())
@@ -125,8 +133,9 @@ public class MovieListFragment extends Fragment implements LoaderManager.LoaderC
 
     @Override
     public void onSaveInstanceState(Bundle outState){
-        super.onSaveInstanceState(outState);
         outState.putInt("sort_index", sort_index);
+        outState.putInt("selected_movie_index", selected_movie_index);
+        super.onSaveInstanceState(outState);
     }
 
     public void fetchMovies() {
@@ -157,14 +166,18 @@ public class MovieListFragment extends Fragment implements LoaderManager.LoaderC
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         mMovieAdpater.swapCursor(cursor);
 
-        Cursor cur = (Cursor) gridView.getItemAtPosition(0);
-        if (cursor != null) {
-            ContentValues cv = new ContentValues();
-            DatabaseUtils.cursorRowToContentValues(cursor, cv);
-            ((Callback) getActivity())
-                    .onLoaded(MoviesContract.MoviesEntry.buildMovieUri(cv.getAsInteger(MoviesContract.MoviesEntry.COLUMN_MOVIE_ID)));
+        if (selected_movie_index >= gridView.getCount()) {
+            selected_movie_index = 0;
         }
-
+        if ( gridView.getCount() > 0 ) {
+            Cursor cur = (Cursor) gridView.getItemAtPosition(selected_movie_index);
+            if (cursor != null) {
+                ContentValues cv = new ContentValues();
+                DatabaseUtils.cursorRowToContentValues(cursor, cv);
+                ((Callback) getActivity())
+                        .onLoaded(MoviesContract.MoviesEntry.buildMovieUri(cv.getAsInteger(MoviesContract.MoviesEntry.COLUMN_MOVIE_ID)));
+            }
+        }
     }
 
     @Override

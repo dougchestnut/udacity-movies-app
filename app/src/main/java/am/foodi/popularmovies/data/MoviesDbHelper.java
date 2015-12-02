@@ -27,7 +27,7 @@ import am.foodi.popularmovies.data.MoviesContract.MoviesEntry;
 public class MoviesDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     static final String DATABASE_NAME = "movies.db";
 
@@ -51,7 +51,7 @@ public class MoviesDbHelper extends SQLiteOpenHelper {
                 MoviesContract.MoviesEntry.COLUMN_VIDEO + " INTEGER NOT NULL, " +
                 MoviesContract.MoviesEntry.COLUMN_VOTE_AVERAGE + " REAL NOT NULL, " +
                 MoviesContract.MoviesEntry.COLUMN_VOTE_COUNT + " INTEGER NOT NULL, " +
-                MoviesContract.MoviesEntry.COLUMN_FAVORITE + " INTEGER NOT NULL);";
+                MoviesContract.MoviesEntry.COLUMN_FAVORITE + " INTEGER);";
 
         sqLiteDatabase.execSQL(SQL_CREATE_MOVIES_TABLE);
     }

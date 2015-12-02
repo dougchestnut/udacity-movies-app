@@ -83,7 +83,12 @@ public class Movie implements Parcelable {
         video = cv.getAsBoolean(MoviesContract.MoviesEntry.COLUMN_VIDEO);
         vote_average = cv.getAsDouble(MoviesContract.MoviesEntry.COLUMN_VOTE_AVERAGE);
         vote_count = cv.getAsInteger(MoviesContract.MoviesEntry.COLUMN_VOTE_COUNT);
-        favorite = new Boolean(cv.getAsInteger(MoviesContract.MoviesEntry.COLUMN_FAVORITE)==1);
+        if (cv.containsKey(MoviesContract.MoviesEntry.COLUMN_FAVORITE) &&
+                cv.get(MoviesContract.MoviesEntry.COLUMN_FAVORITE)!=null) {
+            favorite = new Boolean(cv.getAsInteger(MoviesContract.MoviesEntry.COLUMN_FAVORITE) == 1);
+        } else {
+            favorite = false;
+        }
     }
 
     public Movie(Parcel in) {
@@ -124,7 +129,7 @@ public class Movie implements Parcelable {
         video = movie.getBoolean("video");
         vote_average = movie.getDouble("vote_average");
         vote_count = movie.getInt("vote_count");
-        favorite = false;
+//        favorite = false;
     }
 
     public void setFavorite(Boolean fav) {

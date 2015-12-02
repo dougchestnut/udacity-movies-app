@@ -12,7 +12,6 @@ import android.net.Uri;
 public class MoviesProvider extends ContentProvider {
 
     private MoviesDbHelper mOpenHelper;
-//    private Context mContext;
 
     public static final int MOVIES = 101;
     public static final int FAVORITEMOVIES = 102;
@@ -20,18 +19,6 @@ public class MoviesProvider extends ContentProvider {
 
     // The URI Matcher used by this content provider.
     private static final UriMatcher sURIMatcher = buildUriMatcher();
-//    private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-//    static {
-//        sURIMatcher.addURI(MoviesContract.CONTENT_AUTHORITY,
-//                MoviesContract.PATH_MOVIES,
-//                MOVIES);
-//        sURIMatcher.addURI(MoviesContract.CONTENT_AUTHORITY,
-//                MoviesContract.PATH_FAVORITEMOVIES,
-//                FAVORITEMOVIES);
-//        sURIMatcher.addURI(MoviesContract.CONTENT_AUTHORITY,
-//                MoviesContract.PATH_MOVIES + "/#",
-//                MOVIES_ID);
-//    }
 
     static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -102,7 +89,6 @@ public class MoviesProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-//        mContext = getContext();
         mOpenHelper = new MoviesDbHelper(getContext());
         return true;
     }
@@ -165,6 +151,9 @@ public class MoviesProvider extends ContentProvider {
                 int returnCount = 0;
                 try {
                     for (ContentValues value : values) {
+                        if (value.get(MoviesContract.MoviesEntry.COLUMN_FAVORITE)==null) {
+                            value.remove(MoviesContract.MoviesEntry.COLUMN_FAVORITE);
+                        }
                         long _id = db.insertWithOnConflict(MoviesContract.MoviesEntry.TABLE_NAME, null, value, db.CONFLICT_REPLACE);
                         if (_id != -1) {
                             returnCount++;

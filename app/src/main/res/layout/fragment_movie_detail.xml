@@ -52,7 +52,8 @@
                     android:minHeight="300dp">
 
                     <ImageView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight=".70"
                         android:layout_height="wrap_content"
                         android:id="@+id/poster"
                         android:padding="10dp" />

@@ -71,11 +71,6 @@ public class MovieDetailFragment extends Fragment implements FetchMovieReviewsTa
         ViewHolder viewHolder = new ViewHolder(rootView);
         rootView.setTag(viewHolder);
 
-//        ListView videosView = (ListView) rootView.findViewById(R.id.VideoslistView);
-//        ListView reviewsView = (ListView) rootView.findViewById( R.id.ReviewslistView );
-//        videosView.setAdapter(mVideosAdapter);
-//        reviewsView.setAdapter(mReviewsAdapter);
-
         return rootView;
     }
 

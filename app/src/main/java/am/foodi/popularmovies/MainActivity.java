@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements MovieListFragment
 
     @Override
     public void onLoaded(Uri contentUri) {
-        if (mTwoPane) {
+        if (mTwoPane && contentUri != null) {
 
             Bundle args = new Bundle();
             args.putParcelable(MovieDetailFragment.DETAIL_URI, contentUri);
